@@ -1,28 +1,30 @@
 thisP = shell.getRunningProgram()
 
-if string.find(currProg,"^startup$") then
-	-- default github base stuff
-	tbPath="repos/Kammon/ccTweaked" -- TODO: make this user-provided for on-board download function outside of startup
-	rbPath="https://raw.githubusercontent.com/Kammon/ccTweaked/main" -- TODO: also make this user-provided outside of startup
-else
-	-- using targs for paths
-	assert(targs[1]~=nil and fs.exists(targs[1]))
-	input=fs.open(targs[1],"r")
-	line=input.readLine()
-	while line ~= nil do
-		join({line},paths)
-		line=input.readLine()
-	end
-	input.close()
-end
-
+tbPath="repos/Kammon/ccTweaked"
+rbPath="https://raw.githubusercontent.com/Kammon/ccTweaked/main"
+pathsPath=""
+filename="toDownload"
 paths={}
 
-assert(targs[1]~=nil and fs.exists(targs[1]))
-input=fs.open(targs[1],"r")
+--download Paths for files
+local resp = http.get(pathsPath)
+if resp.getResponseCode() == 200 and tonumber(resp.getResponseHeaders()["content-length"]) > 0 then
+	local file = fs.open(filename,"w")
+	local line = resp.readLine(true)
+	while line ~= nil do
+		file.write(line)
+		line=resp.readLine(true)
+	end
+	file.close()
+end
+resp.close()
+
+assert(fs.exists(filename))
+input=fs.open(filename,"r")
 line=input.readLine()
 while line ~= nil do
-	join({line},paths)
+	paths[#paths+1]=line
+	-- join({line},paths)
 	line=input.readLine()
 end
 input.close()

@@ -1,31 +1,45 @@
--- shell.run("rm startup/")
-thisP = shell.getRunningProgram()
+currProg = shell.getRunningProgram()
 
-tbPath="repos/Kammon/ccTweaked"
-rbPath="https://raw.githubusercontent.com/Kammon/ccTweaked/main"
-pathsPath="https://raw.githubusercontent.com/Kammon/ccTweaked/main/bootstrap/fileList.txt"
-filename="toDownload"
+if string.find(currProg,"^startup/") then
+	-- default github base stuff
+	tbPath="repos/Kammon/ccTweaked" -- TODO: make this user-provided for on-board download function outside of startup
+	rbPath="https://raw.githubusercontent.com/Kammon/ccTweaked/main" -- TODO: also make this user-provided outside of startup
+else
+	-- using targs for paths
+	assert(targs[1]~=nil and fs.exists(targs[1]))
+	input=fs.open(targs[1],"r")
+	line=input.readLine()
+	while line ~= nil do
+		join({line},paths)
+		line=input.readLine()
+	end
+	input.close()
+end
+
+function join(src,dest)
+    if src == dest then
+        local temp = {}
+        join(src,temp)
+        join(temp,dest)
+    else
+        for k,v in pairs(src) do
+            -- print("src entry:",k,v)
+            -- if #dest > 0 then print("dest@len:", #dest,dest[#dest]) end
+            dest[#dest+1] = v
+            -- print("dest@new len:", #dest,dest[#dest])
+            -- os.sleep(5)
+        end
+    end
+end
+
+targs = {...}
 paths={}
 
---download Paths for files
-local resp = http.get(pathsPath)
-if resp.getResponseCode() == 200 and tonumber(resp.getResponseHeaders()["content-length"]) > 0 then
-	local file = fs.open(filename,"w")
-	local line = resp.readLine(true)
-	while line ~= nil do
-		file.write(line)
-		line=resp.readLine(true)
-	end
-	file.close()
-end
-resp.close()
-
-assert(fs.exists(filename))
-input=fs.open(filename,"r")
+assert(targs[1]~=nil and fs.exists(targs[1]))
+input=fs.open(targs[1],"r")
 line=input.readLine()
 while line ~= nil do
-	paths[#paths+1]=line
-	-- join({line},paths)
+	join({line},paths)
 	line=input.readLine()
 end
 input.close()
@@ -90,8 +104,3 @@ for k,v in pairs(paths) do
 	resp.close()
 end
 
-shell.run("rm startup")
-shell.run("rm "..filename)
-shell.run("rm "..thisP)
-
-print("Finished cleaning up! :D")

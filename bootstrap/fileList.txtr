@@ -4,7 +4,7 @@ dir w space/file.lua
 dir.with.period/test.txt
 libraries/core.lua
 listing.logr
-old/startup.lua
+old/startup.lua*
 pastebin/bootstrap.lua
 pastebin/startup.lua
 test2.lua

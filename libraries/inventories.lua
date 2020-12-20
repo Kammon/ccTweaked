@@ -9,7 +9,18 @@ function inventories.getInventories()
 end
 
 function inventories.getInventoryTypes()
-	return inventories.fsu.getContents(inventories.core.bp.."data/inventory/inventoryTypes.txt")
+	local invTypes, kvParts = {}, {}
+	for k,v in pairs(inventories.fsu.getContents(inventories.core.bp.."data/inventory/inventoryTypes.txt")) do
+		kvParts = inventories.core.split(v,"=",nil,false)
+		if #kvParts == 2 then
+			invTypes[inventories.core.trim(kvParts[1])] = inventories.core.trim(kvParts[2])
+		else
+			print("ERROR: Invalid Key/Value pair at "..v.." in "..shell.getRunningProgram())
+			assert(false)
+		end
+	end
+	--return inventories.fsu.getContents(inventories.core.bp.."data/inventory/inventoryTypes.txt")
+	return invTypes
 end
 
 function inventories.isInventory(slot)

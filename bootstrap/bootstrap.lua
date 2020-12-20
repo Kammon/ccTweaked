@@ -77,7 +77,7 @@ end
 -- start downloading files
 for k,v in pairs(paths) do
 	local resp = http.get(paths[k].repo)
-	if resp.getResponseCode() == 200 and tonumber(resp.getResponseHeaders()["content-length"]) > 0 then
+	if resp and resp.getResponseCode() == 200 and tonumber(resp.getResponseHeaders()["content-length"]) > 0 then
 		if fs.exists(paths[k].turtle) then print("File '"..paths[k].turtle.."' exists. Overwriting...") end
 		local file = fs.open(paths[k].turtle,"w")
 		local line = resp.readLine(true)

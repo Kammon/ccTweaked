@@ -9,7 +9,7 @@ function inventories.getInventories()
 end
 
 function inventories.getInventoryTypes()
-	return inventories.fsu.getContents(inventories.core.bp.."data/inventoryTypes.txt")
+	return inventories.fsu.getContents(inventories.core.bp.."data/inventory/inventoryTypes.txt")
 end
 
 function inventories.isInventory(slot)

@@ -22,7 +22,7 @@
 bootstrapPath="https://raw.githubusercontent.com/Kammon/ccTweaked/main/bootstrap/bootstrap.lua"
 
 local resp = http.get(bootstrapPath)
-if resp.getResponseCode() == 200 and tonumber(resp.getResponseHeaders()["content-length"]) > 0 then
+if resp and resp.getResponseCode() == 200 and tonumber(resp.getResponseHeaders()["content-length"]) > 0 then
 	local file = fs.open("bootstrap","w")
 	local line = resp.readLine(true)
 	while line ~= nil do

@@ -8,6 +8,7 @@
 local core = {}
 --Define Constants
 core.SLOT_COUNT = 16
+core.bp = "/repos/Kammon/ccTweaked/"
 
 -- Table Functions:
 

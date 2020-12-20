@@ -53,14 +53,18 @@ function inventories.checkInventory(slot)
 	while turtle.detectUp() do turtle.digUp(); os.sleep(1) end
 	turtle.select(slotInv)
 	turtle.placeUp()
+	turtle.suckUp()
+	local invType = nil
 	for k, v in pairs(inventories.getInventoryTypes()) do
-		turtle.suckUp()
-		local invType = turtle.getItemDetail()
-		if invType then
-			if invType.name == v then thisInv.type = k; thisInv.slot = slotInv end -- NOTE: This won't work atm. Current fileRead only supports numbered indexes
-			turtle.dropUp()
-		else
-			thisInv.type = "empty"; thisInv.slot = slotInv
+		--turtle.suckUp()
+		if this.invType == "unknown" then
+			invType = turtle.getItemDetail()
+			if invType then
+				if invType.name == v then thisInv.type = k; thisInv.slot = slotInv end -- NOTE: This won't work atm. Current fileRead only supports numbered indexes
+				turtle.dropUp()
+			else
+				thisInv.type = "empty"; thisInv.slot = slotInv
+			end
 		end
 	end
 	turtle.digUp() -- NOTE: not entirely sure the behavior I want here. Do I leave the inventory up there and let the caller decide what to do, or do I note the invType and slot and relay that to the caller instead?

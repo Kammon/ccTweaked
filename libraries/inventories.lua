@@ -4,11 +4,12 @@
 local inventories = {}
 inventories.core = require("/repos/Kammon/ccTweaked/libraries/core")
 inventories.fsu = require(inventories.core.bp.."libraries/fsUtils")
-inventories.invList = inventories.getInventories()
 
 function inventories.getInventories()
 	return inventories.fsu.getContents(inventories.core.bp.."data/inventory/inventories.txt")
 end
+
+inventories.invList = inventories.getInventories()
 
 function inventories.getInventoryTypes()
 	local invTypes, kvParts = {}, {}

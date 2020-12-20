@@ -4,6 +4,8 @@
 local inventories = {}
 inventories.core = require("/repos/Kammon/ccTweaked/libraries/core")
 inventories.fsu = require(inventories.core.bp.."libraries/fsUtils")
+inventories.invList = inventories.getInventories()
+
 function inventories.getInventories()
 	return inventories.fsu.getContents(inventories.core.bp.."data/inventory/inventories.txt")
 end
@@ -25,7 +27,7 @@ end
 
 function inventories.isInventory(slot)
 	local slotItem, isInv = turtle.getItemDetail(slot), false
-	for k,v in pairs(getInventories()) do
+	for k,v in pairs(inventories.invList) do
 		if slotItem then
 			if slotItem.name == v then isInv = true end
 		end

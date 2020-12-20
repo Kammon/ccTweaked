@@ -1,11 +1,12 @@
  a dir with spaces / newfile.lua 
+bootstrap/bootstrap.lua
 bootstrap/fileList.txt
 dir w space/file.lua
 dir.with.period/test.txt
 libraries/core.lua
 listing.logr
+notes.lua
 old/startup.lua
-pastebin/bootstrap.lua
 pastebin/startup.lua
 test2.lua
 test3.lua

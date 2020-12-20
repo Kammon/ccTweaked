@@ -1,0 +1,5 @@
+time="money"
+money="no object"
+therefore="time is no object"
+hence="I am immortal"
+hashtag="shittyLogic"

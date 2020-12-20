@@ -1,5 +1,5 @@
-local core = require("repos/Kammon/ccTweaked/libraries/core")
-local fsu = require(core.bp.."/libraries/fsUtils") -- not entirely sure how I want these to work
+local core = require("/repos/Kammon/ccTweaked/libraries/core")
+local fsu = require(core.bp.."libraries/fsUtils") -- not entirely sure how I want these to work
 
 local inventories = {}
 function inventories.getInventories()

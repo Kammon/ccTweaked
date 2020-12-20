@@ -3,3 +3,7 @@ money=no object
 therefore=time is no object
 hence=I am immortal
 hashtag=shittyLogic
+resources=minecraft:emerald
+blocks=minecraft:planks
+inventory=minecraft:chest
+fuel=minecraft:lava_bucket

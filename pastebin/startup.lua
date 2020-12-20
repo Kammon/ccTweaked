@@ -19,7 +19,7 @@
 --]]
 
 
-bootstrapPath="https://raw.githubusercontent.com/Kammon/ccTweaked/main/pastebin/bootstrap.lua"
+bootstrapPath="https://raw.githubusercontent.com/Kammon/ccTweaked/main/bootstrap/bootstrap.lua"
 
 local resp = http.get(bootstrapPath)
 if resp.getResponseCode() == 200 and tonumber(resp.getResponseHeaders()["content-length"]) > 0 then

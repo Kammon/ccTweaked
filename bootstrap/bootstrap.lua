@@ -9,7 +9,7 @@ paths={}
 
 --download Paths for files
 local resp = http.get(pathsPath)
-if resp.getResponseCode() == 200 and tonumber(resp.getResponseHeaders()["content-length"]) > 0 then
+if resp and resp.getResponseCode() == 200 and tonumber(resp.getResponseHeaders()["content-length"]) > 0 then
 	local file = fs.open(filename,"w")
 	local line = resp.readLine(true)
 	while line ~= nil do
@@ -17,8 +17,8 @@ if resp.getResponseCode() == 200 and tonumber(resp.getResponseHeaders()["content
 		line=resp.readLine(true)
 	end
 	file.close()
+	resp.close()
 end
-resp.close()
 
 assert(fs.exists(filename))
 input=fs.open(filename,"r")
@@ -86,8 +86,8 @@ for k,v in pairs(paths) do
 			line=resp.readLine(true)
 		end
 		file.close()
+		resp.close()
 	end
-	resp.close()
 end
 
 shell.run("rm startup")

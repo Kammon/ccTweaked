@@ -57,7 +57,7 @@ function inventories.checkInventory(slot)
 	local invType = nil
 	for k, v in pairs(inventories.getInventoryTypes()) do
 		--turtle.suckUp()
-		if this.invType == "unknown" then
+		if thisInv.type == "unknown" then
 			invType = turtle.getItemDetail()
 			if invType then
 				if invType.name == v then thisInv.type = k; thisInv.slot = slotInv end -- NOTE: This won't work atm. Current fileRead only supports numbered indexes

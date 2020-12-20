@@ -35,7 +35,8 @@ end
 
 function inventories.checkInventory(slot)
 	local slotInv, thisInv, currSlot = slot, {type="unknown", slot=-1}, turtle.getSelectedSlot()
-	local invTypes, kvParts = {}, {}
+	--local invTypes = getInventoryTypes()
+	--[[
 	for k,v in pairs(getInventoryTypes()) do
 		--working on improving fileRead and split to make k,v pairs
 		kvParts = core.split(v,"=",nil,false)
@@ -45,10 +46,11 @@ function inventories.checkInventory(slot)
 			print("ERROR: Invalid Key/Value pair at "..v)
 		end
 	end
+	--]]
 	while turtle.detectUp() do turtle.digUp(); os.sleep(1) end
 	turtle.select(slotInv)
 	turtle.placeUp()
-	for k, v in pairs(invTypes) do
+	for k, v in pairs(inventories.getInventoryTypes()) do
 		turtle.suckUp()
 		local invType = turtle.getItemDetail()
 		if invType then

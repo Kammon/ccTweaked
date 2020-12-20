@@ -61,12 +61,14 @@ function inventories.checkInventory(slot)
 			invType = turtle.getItemDetail()
 			if invType then
 				if invType.name == v then thisInv.type = k; thisInv.slot = slotInv end -- NOTE: This won't work atm. Current fileRead only supports numbered indexes
-				turtle.dropUp()
+				--turtle.dropUp()
 			else
 				thisInv.type = "empty"; thisInv.slot = slotInv
 			end
 		end
 	end
+	turtle.dropUp()
+	if thisInv.type == "unknown" then print("ERROR: unknown item key: "..invType.name.." in slot "..tostring(slotInv))
 	turtle.digUp() -- NOTE: not entirely sure the behavior I want here. Do I leave the inventory up there and let the caller decide what to do, or do I note the invType and slot and relay that to the caller instead?
 	turtle.select(currSlot)
 	return thisInv

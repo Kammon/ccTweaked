@@ -1,6 +1,6 @@
 local fsUtils = {}
 
-function fsutils.getContents(path)
+function fsUtils.getContents(path)
 	local contents = {}
 	local handle = fs.open(path,"r")
 	if handle then

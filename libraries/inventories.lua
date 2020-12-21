@@ -71,7 +71,7 @@ function inventories.checkInventory(slot)
 		end
 	end
 	turtle.dropUp()
-	if thisInv.type == "unknown" then --[[ print("ERROR: unknown item key: "..invType.name.." in slot "..tostring(slotInv)); --]] thisInv.type = thisInv.type..": "..invType.name; thisInv.slot = slotInv end
+	if thisInv.type == "unknown" then --[[ print("ERROR: unknown item key: "..invType.name.." in slot "..tostring(slotInv)); --]] thisInv.type = thisInv.type.." -- "..invType.name; thisInv.slot = slotInv end
 	turtle.digUp() -- NOTE: not entirely sure the behavior I want here. Do I leave the inventory up there and let the caller decide what to do, or do I note the invType and slot and relay that to the caller instead?
 	turtle.select(currSlot)
 	return thisInv

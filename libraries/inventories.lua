@@ -29,6 +29,8 @@ function inventories.getInventoryTypes()
 	return inventories.core.getKeyValuePairs(inventories.fsu.getContents(inventories.core.bp.."data/inventory/inventoryTypes.txt"))
 end
 
+inventories.invTypeList = inventories.getInventoryTypes()
+
 function inventories.isInventory(slot)
 	local slotItem, isInv = turtle.getItemDetail(slot), false
 	for k,v in pairs(inventories.invList) do
@@ -58,7 +60,7 @@ function inventories.checkInventory(slot)
 	turtle.placeUp()
 	turtle.suckUp()
 	local invType = nil
-	for k, v in pairs(inventories.getInventoryTypes()) do
+	for k, v in pairs(inventories.invTypeList) do
 		--turtle.suckUp()
 		if thisInv.type == "unknown" then
 			invType = turtle.getItemDetail()

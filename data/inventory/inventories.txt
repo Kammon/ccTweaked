@@ -1,6 +1,4 @@
-butter
-milk
-eggs
 minecraft:chest
 immersiveengineering:wooden_device0
-enderstorage:ender_storage
+immersiveengineering:reinforced_crate
+enderstorage:enderstorage:ender_chest

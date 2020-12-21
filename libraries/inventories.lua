@@ -12,6 +12,7 @@ end
 inventories.invList = inventories.getInventories()
 
 function inventories.getInventoryTypes()
+	--[[
 	local invTypes, kvParts = {}, {}
 	for k,v in pairs(inventories.fsu.getContents(inventories.core.bp.."data/inventory/inventoryTypes.txt")) do
 		kvParts = inventories.core.split(v,"=",nil,false)
@@ -24,6 +25,8 @@ function inventories.getInventoryTypes()
 	end
 	--return inventories.fsu.getContents(inventories.core.bp.."data/inventory/inventoryTypes.txt")
 	return invTypes
+	--]]
+	return inventories.core.getKeyValuePairs(inventories.fsu.getContents(inventories.core.bp.."data/inventory/inventoryTypes.txt"))
 end
 
 function inventories.isInventory(slot)
@@ -72,6 +75,14 @@ function inventories.checkInventory(slot)
 	turtle.digUp() -- NOTE: not entirely sure the behavior I want here. Do I leave the inventory up there and let the caller decide what to do, or do I note the invType and slot and relay that to the caller instead?
 	turtle.select(currSlot)
 	return thisInv
+end
+
+function inventories.getTurtleInventories()
+	local tInventories = {}
+	for i=1, inventories.core.SLOT_COUNT do
+		if inventories.isInventory(i) then tInventories[#tInventories + 1] = inventories.checkInventory(i) end
+	end
+	return tInventories
 end
 
 return inventories

@@ -1,9 +1,7 @@
-time=money
-money=no object
-therefore=time is no object
-hence=I am immortal
-hashtag=shittyLogic
-resources=minecraft:emerald
-blocks=minecraft:planks
+resources=minecraft:iron_ingot
+blocks=minecraft:brick_block
 inventory=minecraft:chest
-fuel=minecraft:lava_bucket
+fuel=minecraft:potato
+torches=minecraft:lit_pumpkin
+crafting=minecraft:crafting_table
+

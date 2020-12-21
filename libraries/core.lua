@@ -80,5 +80,19 @@ function core.selectFromList(input, reference, output)
     --return output
 end
 
+function core.getKeyValuePairs(table)
+	local kvPairs, kvParts = {}, {}
+	for k,v in pairs(table) do
+		kvParts = core.split(v,"=",nil,false)
+		if #kvParts == 2 then
+			kvPairs[core.trim(kvParts[1])] = core.trim(kvParts[2])
+		else
+			print("ERROR: Invalid Key/Value pair at "..v.." in "..shell.getRunningProgram())
+			assert(false)
+		end
+	end
+	return kvPairs	
+end
+
 -- send the library out to the calling require
 return core

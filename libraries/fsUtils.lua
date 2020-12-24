@@ -6,7 +6,9 @@ function fsUtils.getContents(path)
 	if handle then
 		local line = handle.readLine()
 		while line ~= nil do
-			contents[#contents + 1] = line
+			if not string.find(line, "^$") and not (string.find(line, "^#") or string.find(line,"^%-%-")) then
+				contents[#contents + 1] = line
+			end
 			line = handle.readLine()
 		end
 		handle.close()

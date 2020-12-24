@@ -1,6 +1,8 @@
+--this is a comment
 resources=minecraft:iron_ingot
 blocks=minecraft:brick_block
 inventory=minecraft:chest
+#this is also a comment
 fuel=minecraft:potato
 torches=minecraft:lit_pumpkin
 crafting=minecraft:crafting_table

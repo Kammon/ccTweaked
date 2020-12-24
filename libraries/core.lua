@@ -89,7 +89,7 @@ function core.getKeyValuePairs(table)
 				kvPairs[core.trim(kvParts[1])] = core.trim(kvParts[2])
 			else
 				print("ERROR: Invalid Key/Value pair at "..v.." in "..shell.getRunningProgram())
-				assert(false)
+				--assert(false)
 			end
 		end
 	end

@@ -7,3 +7,5 @@ fuel=minecraft:potato
 torches=minecraft:lit_pumpkin
 crafting=minecraft:crafting_table
 
+turtles=ccTweaked:computer
+

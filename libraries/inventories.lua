@@ -100,19 +100,31 @@ function inventories.getEmptySlots()
 end
 
 function inventories.extractFromInventory(slot)
-	local currSlot = turtle.getSelectedSlot()
-	while turtle.detectUp() do
+	local currSlot, gotItem = turtle.getSelectedSlot(), false
+	if inventories.getEmptySlots() then
+		while turtle.detectUp() do
+			turtle.digUp()
+			os.sleep(1)
+		end
+		turtle.select(slot)
+		turtle.placeUp()
+		turtle.suckUp()
+		gotItem = turtle.suckUp()
+		turtle.dropUp()
 		turtle.digUp()
-		os.sleep(1)
+		turtle.select(currSlot)
 	end
-	turtle.select(slot)
-	turtle.placeUp()
-	turtle.suckUp()
-	turtle.suckUp()
-	turtle.dropUp()
-	turtle.digUp()
-	turtle.select(currSlot)
+	return gotItem
 end
 
+function inventories.getStack(inventory)
+	local currSlot, gotItem, tInventories = turtle.getSelectedSlot(), false, inventories.getTurtleInventories()
+	for i = 1, #tInventories do
+		if not gotItem and tInventories[i].type == inventory then
+			gotItem = inventories.extractFromInventory(tInventories[i].slot)
+		end
+	end
+	return gotItem
+end
 
 return inventories

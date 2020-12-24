@@ -99,4 +99,20 @@ function inventories.getEmptySlots()
 	return hasEmptySlots, emptySlots
 end
 
+function inventories.extractFromInventory(slot)
+	local currSlot = turtle.getSelectedSlot()
+	while turtle.detectUp() do
+		turtle.digUp()
+		os.sleep(1)
+	end
+	turtle.select(slot)
+	turtle.placeUp()
+	turtle.suckUp()
+	turtle.suckUp()
+	turtle.dropUp()
+	turtle.digUp()
+	turtle.select(currSlot)
+end
+
+
 return inventories

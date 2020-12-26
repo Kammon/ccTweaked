@@ -1,0 +1,4 @@
+# Light Sources
+minecraft:torch
+actuallyadditions:block_tiny_torch
+minecraft:glowstone

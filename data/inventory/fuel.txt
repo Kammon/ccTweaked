@@ -1,0 +1,12 @@
+# Fuel sources
+
+# coal: damage=0, charcoal: damage=1
+minecraft:coal
+minecraft:coal_block
+minecraft:lava_bucket
+# coal coke block: damage = 6
+railcraft:generic
+railcraft:fuel_coke
+# coal coke block: damage = 1
+thermalfoundation:storage_resource
+ic2:coke

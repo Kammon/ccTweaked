@@ -19,4 +19,20 @@
 	-blocks of coal cooked in coke ove become blocks of coke (railcraft) {name="railcraft:generic", damage=6}
 	-when turning coke items into blocks it becomes the thermal foundation variant {name="themralfoundation:storage_resource",damage=1}
 -tiny torch (tiny coal/charcoal (8x/coal/charcoal) & stick = 2x tiny torch) light level 12 instead of 14, but much less resource intensive early on. Using just charcoal and sticks, it's 3 logs per 16 tiny torches. Comparatively it's 4.5 logs per 16.
+
+
+
+TO-DO (20.12.24):
+	check inv.getStack() with multiple of the same inventory, both full and empty
+
+
+
+TO-do: Storing items in chests:
+	starting with unwanted list, cycle through list of inventories until found
+	-Edge Cases:
+		-Item present in chest, but not enough room to take all of it from turtle
+			-turtle.Drop() returns true, but some items remain in that slot in turtle
+
+
+
 --]]

@@ -9,6 +9,12 @@ function inventories.getInventories()
 	return inventories.fsu.getContents(inventories.core.bp.."data/inventory/inventories.txt")
 end
 
+--list resources/blocks/inventories/etc
+inventories.blocks = inventories.fsu.getContents(inventories.core.bp.."data/inventory/blocks.txt")
+inventories.fuel = inventories.fsu.getContents(inventories.core.bp.."data/inventory/fuel.txt")
+inventories.resources = inventories.fsu.getContents(inventories.core.bp.."data/inventory/resources.txt")
+inventories.unwanted = inventories.fsu.getContents(inventories.core.bp.."data/inventory/unwanted.txt")
+inventories.lighting = inventories.fsu.getContents(inventories.core.bp.."data/inventory/lighting.txt")
 inventories.invList = inventories.getInventories()
 
 function inventories.getInventoryTypes()
@@ -58,21 +64,25 @@ function inventories.checkInventory(slot)
 	while turtle.detectUp() do turtle.digUp(); os.sleep(1) end
 	turtle.select(slotInv)
 	turtle.placeUp()
-	turtle.suckUp()
 	local invType = nil
-	for k, v in pairs(inventories.invTypeList) do
-		--turtle.suckUp()
-		if thisInv.type == "unknown" then
-			invType = turtle.getItemDetail()
-			if invType then
-				if invType.name == v then thisInv.type = k; thisInv.slot = slotInv end -- NOTE: This won't work atm. Current fileRead only supports numbered indexes
-				--turtle.dropUp()
-			else
-				thisInv.type = "empty"; thisInv.slot = slotInv
+	if turtle.suckUp() then
+		for k, v in pairs(inventories.invTypeList) do
+			--turtle.suckUp()
+			if thisInv.type == "unknown" then
+				invType = turtle.getItemDetail()
+				if invType then
+					if invType.name == v then thisInv.type = k; thisInv.slot = slotInv end -- NOTE: This won't work atm. Current fileRead only supports numbered indexes
+					--turtle.dropUp()
+				end
+				-- else
+				-- 	thisInv.type = "empty"; thisInv.slot = slotInv
+				-- end
 			end
 		end
+		turtle.dropUp()
+	else
+		thisInv.type = "empty"; thisInv.slot = slotInv
 	end
-	turtle.dropUp()
 	if thisInv.type == "unknown" then --[[ print("ERROR: unknown item key: "..invType.name.." in slot "..tostring(slotInv)); --]] thisInv.type = thisInv.type.." -- "..invType.name; thisInv.slot = slotInv end
 	turtle.digUp() -- NOTE: not entirely sure the behavior I want here. Do I leave the inventory up there and let the caller decide what to do, or do I note the invType and slot and relay that to the caller instead?
 	turtle.select(currSlot)
@@ -125,6 +135,14 @@ function inventories.getStack(inventory)
 		end
 	end
 	return gotItem
+end
+
+function inventories.storeInInventory(slot, inventory)
+	local currSlot, storedItem, tInventories = turtle.getSelectedSlot(), false, inventories.getTurtleInventories()
+	for i = 1, #tInventories do
+		inventories.
+	end
+
 end
 
 return inventories

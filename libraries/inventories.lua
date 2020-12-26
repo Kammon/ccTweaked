@@ -140,7 +140,7 @@ end
 function inventories.storeInInventory(slot, inventory)
 	local currSlot, storedItem, tInventories = turtle.getSelectedSlot(), false, inventories.getTurtleInventories()
 	for i = 1, #tInventories do
-		inventories.
+		-- inventories.
 	end
 
 end

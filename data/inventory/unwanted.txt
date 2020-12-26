@@ -1,0 +1,4 @@
+# List of unwanted items to throw out
+
+minecraft:dirt
+minecraft:cobblestone

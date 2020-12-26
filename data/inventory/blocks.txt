@@ -1,0 +1,4 @@
+minecraft:stone
+minecraft:cobblestone
+minecraft:sand
+minecraft:dirt

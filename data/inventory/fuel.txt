@@ -10,3 +10,4 @@ railcraft:fuel_coke
 # coal coke block: damage = 1
 thermalfoundation:storage_resource
 ic2:coke
+modern_industrialization:coke

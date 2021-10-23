@@ -36,3 +36,14 @@ TO-do: Storing items in chests:
 
 
 --]]
+
+
+--[[
+
+Put useful command notes here that you're sick of copy/pasting:
+
+shell.run("pastebin get sMJ4MXnw startup")
+shell.run("reboot")
+
+
+--]]

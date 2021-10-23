@@ -1,9 +1,9 @@
 -- shell.run("rm startup/")
 thisP = shell.getRunningProgram()
 
-tbPath="repos/Kammon/ccTweaked"
-rbPath="https://raw.githubusercontent.com/Kammon/ccTweaked/main"
-pathsPath="https://raw.githubusercontent.com/Kammon/ccTweaked/main/bootstrap/fileList.txt"
+tbPath="repos/Kammon/ccTweaked" -- base path for files to be stored on turtle
+rbPath="https://raw.githubusercontent.com/Kammon/ccTweaked/main" -- base path for git repository files
+pathsPath="https://raw.githubusercontent.com/Kammon/ccTweaked/main/bootstrap/fileList.txt" -- file containing file paths to download once appended to base repo path
 filename="toDownload"
 paths={}
 

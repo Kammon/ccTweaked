@@ -101,7 +101,7 @@ function inventories.getTurtleInventory()
 	local slotItem, tInventory = nil, {}
 	for i=1, inventories.core.SLOT_COUNT do
 		slotItem = turtle.getItemDetail(i)
-		if slotItem then tInventory[#tInventory + 1] = slotItem else tInventory[#tInventory + 1] = {nil} end
+		if slotItem then tInventory[#tInventory + 1] = slotItem else tInventory[#tInventory + 1] = nil end
 	end
 	return tInventory
 end

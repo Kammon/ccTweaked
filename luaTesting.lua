@@ -38,6 +38,7 @@ while true do
 		i=i+1;
 		if entity.name == "minecraft:oak_log" then
 			turtle.dig();
+			turtle.forward(); -- bye bye space turtle
 			present, blockAbove = turtle.inspectUp()
 			while present and blockAbove.name ~= "minecraft:glass_pane" do turtle.digUp(); turtle.up(); end
 			while not turtle.detectDown() do turtle.down(); end

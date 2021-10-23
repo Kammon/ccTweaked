@@ -35,7 +35,6 @@ end
 while true do
 	i, continue, present, entity = 1, true, turtle.inspect();
 	while present and entity.name == "minecraft:oak_log" or entity.name == "minecraft:oak_sapling" do
-		i=i+1;
 		if entity.name == "minecraft:oak_log" then
 			turtle.dig();
 			turtle.forward(); -- bye bye space turtle
@@ -49,6 +48,7 @@ while true do
 		turtle.forward();
 		turtle.turnRight();
 		present, entity = turtle.inspect();
+		i=i+1;
 	end
 	turtle.turnRight();
 	for i=i,1,-1 do	turtle.forward() end

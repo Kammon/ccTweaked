@@ -97,6 +97,14 @@ function inventories.getTurtleInventories()
 	return tInventories
 end
 
+function inventories.getTurtleInventory()
+	local slotItem, tInventory = nil, {}
+	for i=1, inventories.core.SLOT_COUNT do
+		tInventory[#tInventory + 1] = turtle.getItemDetail(i)
+	end
+	return tIventory
+end
+
 function inventories.getEmptySlots()
 	local slotItem, emptySlots, hasEmptySlots = nil, {}, false
 	for i=1, inventories.core.SLOT_COUNT do

@@ -42,6 +42,9 @@ TO-do: Storing items in chests:
 
 Put useful command notes here that you're sick of copy/pasting:
 
+-- populate file list for repo bootstrap script:
+tree -ifF . | grep -v '/$' | grep -ioP -e '(?<=\.\/).+$' > bootstrap/fileList.txt && sed -i 's/\*$//g' bootstrap/fileList.txt
+
 shell.run("pastebin get sMJ4MXnw startup")
 shell.run("reboot")
 

@@ -6,9 +6,12 @@ data/inventory/inventories.txt
 data/inventory/inventoryTypes.txt
 data/inventory/lighting.txt
 data/inventory/resources.txt
+data/inventory/saplings.txt
 data/inventory/unwanted.txt
+data/inventory/wood.txt
 libraries/core.lua
 libraries/fsUtils.lua
+libraries/inv.lua
 libraries/inventories.lua
 libraries/test2.lua
 libraries/test3.lua
@@ -16,4 +19,7 @@ libraries/testLibrary.lua
 luaTesting.lua
 notes.lua
 old/startup.lua
+old/testfile
 pastebin/startup.lua
+tmpLog.txt
+tmpSaplings.txt

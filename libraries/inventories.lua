@@ -97,11 +97,19 @@ function inventories.getTurtleInventories()
 	return tInventories
 end
 
-function inventories.getTurtleInventory()
-	local slotItem, tInventory = nil, {}
+function inventories.getTurtleInventory(detailed)
+	local detail, slotItem, tInventory = false or detailed, nil, {}
 	for i=1, inventories.core.SLOT_COUNT do
-		slotItem = turtle.getItemDetail(i)
-		if slotItem then tInventory[#tInventory + 1] = slotItem else tInventory[#tInventory + 1] = {name = nil, count = 0} end
+		slotItem = turtle.getItemDetail(i, detail)
+		if slotItem then
+			tInventory[#tInventory + 1] = slotItem
+		else
+			if detail then
+				tInventory[#tInventory + 1] = { count = 0, displayName = "Empty Slot", maxCount = 1, name = nil, tags = {} }
+			else	
+				tInventory[#tInventory + 1] = { name = nil, count = 0 }
+			end
+		end
 	end
 	return tInventory
 end

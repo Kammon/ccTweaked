@@ -39,7 +39,7 @@ while true do
 		if entity.name == "minecraft:oak_log" then
 			turtle.dig();
 			present, blockAbove = turtle.inspectUp()
-			while present && blockAbove.name ~= "minecraft:glass_pane" do turtle.digUp(); turtle.up(); end
+			while present and blockAbove.name ~= "minecraft:glass_pane" do turtle.digUp(); turtle.up(); end
 			while not turtle.detectDown() do turtle.down(); end
 			turtle.back();
 			turtle.place(); -- again assuming saplings in current slot

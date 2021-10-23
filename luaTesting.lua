@@ -35,20 +35,22 @@ end
 while true do
 	i, continue, present, entity = 1, true, turtle.inspect();
 	while present and entity.name == "minecraft:oak_log" or entity.name == "minecraft:oak_sapling" do
-		if entity.name == "minecraft:oak_log" then
-			turtle.dig();
-			turtle.forward(); -- bye bye space turtle
-			present, blockAbove = turtle.inspectUp()
-			while present and blockAbove.name ~= "minecraft:glass_pane" and blockAbove.name ~= "minecraft:air" do turtle.digUp(); turtle.up(); end
-			while not turtle.detectDown() do turtle.down(); end
-			turtle.back();
-			turtle.place(); -- again assuming saplings in current slot
-		end
+		if entity.name == "minecraft:oak_log" or entity.name == "minecraft:oak_sapling" then
+			i=i+1;
+			if entity.name == "minecraft:oak_log" then
+				turtle.dig();
+				turtle.forward(); -- bye bye space turtle
+				present, blockAbove = turtle.inspectUp()
+				while present and blockAbove.name ~= "minecraft:glass_pane" and blockAbove.name ~= "minecraft:air" do turtle.digUp(); turtle.up(); end
+				while not turtle.detectDown() do turtle.down(); end
+				turtle.back();
+				turtle.place(); -- again assuming saplings in current slot
+			end
+		end 
 		turtle.turnLeft();
 		turtle.forward();
 		turtle.turnRight();
 		present, entity = turtle.inspect();
-		i=i+1;
 	end
 	turtle.turnRight();
 	for i=i,1,-1 do	turtle.forward() end

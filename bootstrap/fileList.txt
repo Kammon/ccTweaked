@@ -21,5 +21,9 @@ notes.lua
 old/startup.lua
 old/testfile
 pastebin/startup.lua
+testing/module1.lua
+testing/module2.lua
+testing/module3.lua
+testing/program.lua
 tmpLog.txt
 tmpSaplings.txt

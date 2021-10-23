@@ -103,7 +103,7 @@ function inventories.getTurtleInventory()
 		slotItem = turtle.getItemDetail(i)
 		if slotItem then tInventory[#tInventory + 1] = slotItem else tInventory[#tInventory + 1] = nil end
 	end
-	return tIventory
+	return tInventory
 end
 
 function inventories.getEmptySlots()

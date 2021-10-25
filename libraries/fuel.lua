@@ -7,6 +7,17 @@ local fsUtils = require("/repos/Kammon/ccTweaked/libraries/fsUtils");
 local fuelList = fsUtils.getContents(core.bp.."/data/inventory/fuel.txt");
 local FUEL_THRESHOLD = 1000;
 
+--[[
+-- Testing code
+function fuel.isFuel(slot)
+	local slotItem, isFuel = turtle.getItemDetail(slot), false;
+	for k,v in pairs(fuelList) do
+		if slotItem and slotItem.name == v then isFuel = true end
+	end
+	return isFuel, slotItem;
+end
+--]]
+
 function isFuel(slot)
 	local slotItem, isFuel = turtle.getItemDetail(slot), false;
 	for k,v in pairs(fuelList) do
@@ -28,7 +39,7 @@ function fuel.recharge(amount)
 	local refueled, msg = false, "Fuel not yet below minimum reserve threshold of "..FUEL_THRESHOLD..".";
 	if turtle.getFuelLevel() < FUEL_THRESHOLD then
 		local amount, currSlot, fuelSources = amount or nil, turtle.getSelectedSlot(), getFuelSources();
-		if fuelSources then
+		if #fuelSources > 0 then
 			for i = 1,#fuelSources do
 				turtle.select(fuelSources[i].slot);
 				while turtle.getItemCount(fuelSources[i].slot) > 0 and turtle.getFuelLevel() < FUEL_Threshold do

@@ -4,7 +4,7 @@ local core = require("/repos/Kammon/ccTweaked/libraries/core");
 local fsUtils = require("/repos/Kammon/ccTweaked/libraries/fsUtils");
 --local inventories = require("/repos/Kammon/ccTweaked/libraries/inventories");
 
-local fuelList = 
+local fuelList = fsUtils.getContents(core.bp.."/data/inventory/fuel.txt");
 local FUEL_THRESHOLD = 1000;
 
 function isFuel(slot)

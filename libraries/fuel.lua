@@ -44,6 +44,7 @@ function fuel.recharge(amount)
 			msg = "No fuel sources present. Turtle is running on reserve power below minimum threshold of "..FUEL_THRESHOLD.." and will cease function if not refueled."; refueled = false;
 		end
 	end
+	return refueled, msg
 end
 
 

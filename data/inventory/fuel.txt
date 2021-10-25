@@ -2,6 +2,7 @@
 
 # coal: damage=0, charcoal: damage=1
 minecraft:coal
+minecraft:charcoal
 minecraft:coal_block
 minecraft:lava_bucket
 # coal coke block: damage = 6

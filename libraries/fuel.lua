@@ -25,7 +25,7 @@ function getFuelSources()
 end
 
 function fuel.recharge(amount)
-	local refueled, msg = false, "Fuel not yet below minimum reserve threshold of "..FUEL.THRESHOLD..".";
+	local refueled, msg = false, "Fuel not yet below minimum reserve threshold of "..FUEL_THRESHOLD..".";
 	if turtle.getFuelLevel() < FUEL_THRESHOLD then
 		local amount, currSlot, fuelSources = amount or nil, turtle.getSelectedSlot(), getFuelSources();
 		if fuelSources then

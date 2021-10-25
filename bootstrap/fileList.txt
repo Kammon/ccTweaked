@@ -1,5 +1,6 @@
 bootstrap/bootstrap.lua
 bootstrap/fileList.txt
+data/config.txt
 data/inventory/blocks.txt
 data/inventory/fuel.txt
 data/inventory/inventories.txt
@@ -11,6 +12,7 @@ data/inventory/unwanted.txt
 data/inventory/wood.txt
 libraries/core.lua
 libraries/fsUtils.lua
+libraries/fuel.lua
 libraries/inv.lua
 libraries/inventories.lua
 libraries/test2.lua

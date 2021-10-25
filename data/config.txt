@@ -1,0 +1,4 @@
+# Data files
+fuel = /data/inventories/fuel.txt
+lighting = /data/inventories/lighting.txt
+blocks = /data/inventories/blocks.txt 

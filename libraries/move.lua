@@ -9,6 +9,7 @@ function move(direction)
 	local dir, moveStatus, fuelStatus = direction or nil, { moved = false, msg = "Move in progress..." }, fuel.recharge(1);
 	if not refueled and not string.find(fuelStatus.fuelMsg, "not yet below") then
 		-- Code to call home for fuel resupply should go here. Needs nested inventories, and code added to fuel.lua library for fuel.resupply(), then reassign fuelStatus to a new fuel.recharge(1) call.
+		print(textutils.serialize(fuelStatus));
 		print("Placeholder for fuel resupply code.");
 	end
 	if fuelStatus.currentFuel > 0 then

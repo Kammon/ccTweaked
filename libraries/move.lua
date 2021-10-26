@@ -16,25 +16,25 @@ function move(direction)
 			if direction == "forward" then
 				while turtle.detect() do turtle.dig(); os.sleep(1); end
 				moveStatus.moved = turtle.forward();
-			else if direction == "back" then
+			elseif direction == "back" then
 				for i = 1, 2 do turtle.turnRight(); end
 				while turtle.detect() do turtle.dig(); os.sleep(1); end
 				moveStatus.moved = turtle.forward();
 				for i = 1, 2 do turtle.turnLeft(); end
-			else if direction == "left" then
+			elseif direction == "left" then
 				turtle.turnLeft();
 				while turtle.detect() do turtle.dig(); os.sleep(1); end
 				moveStatus.moved = turtle.forward();
 				turtle.turnRight();
-			else if direction == "right" then
+			elseif direction == "right" then
 				turtle.turnRight();
 				while turtle.detect() do turtle.dig(); os.sleep(1); end
 				moveStatus.moved = turtle.forward();
 				turtle.turnLeft();
-			else if direction == "up" then
+			elseif direction == "up" then
 				while turtle.detectUp() do turtle.digUp(); os.sleep(1); end
 				moveStatus.moved = turtle.up();
-			else if direction == "down" then
+			elseif direction == "down" then
 				local blockBelow = turtle.detectDown();
 				while blockBelow and (blockBelow.name ~= "minecraft:water" and blockBelow.name ~= "minecraft:lava" and blockBelow.name ~= "minecraft:bedrock" ) do turtle.digDown(); os.sleep(1); end
 				moveStatus.moved = turtle.down();

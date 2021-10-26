@@ -32,11 +32,12 @@ function move(direction)
 				moveStatus.moved = turtle.forward();
 				turtle.turnLeft();
 			elseif direction == "up" then
-				while turtle.detectUp() do turtle.digUp(); os.sleep(1); end
+				local blockAbove = turtle.inspectUp()
+				while turtle.detectUp() and blockAbove and blockAbove.name ~= "minecraft:bedrock" do turtle.digUp(); os.sleep(1); end
 				moveStatus.moved = turtle.up();
 			elseif direction == "down" then
-				local blockBelow = turtle.detectDown();
-				while blockBelow and (blockBelow.name ~= "minecraft:water" and blockBelow.name ~= "minecraft:lava" and blockBelow.name ~= "minecraft:bedrock" ) do turtle.digDown(); os.sleep(1); end
+				local blockBelow = turtle.inspectDown();
+				while turtle.detectDown() and blockBelow and blockBelow.name ~= "minecraft:bedrock"  do turtle.digDown(); os.sleep(1); end
 				moveStatus.moved = turtle.down();
 			else
 				moveStatus.msg = "Invalid direction supplied.";

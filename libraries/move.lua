@@ -7,7 +7,7 @@ local fuel = require("/repos/Kammon/ccTweaked/libraries/fuel")
 
 function move(direction)
 	local dir, moveStatus, fuelStatus = direction or nil, { moved = false, msg = "Move in progress..." }, fuel.recharge(1);
-	if not refueled and not string.find(fuelStatus.fuelMsg, "not yet below") then
+	if not fuelStatus.refueled and not string.find(fuelStatus.fuelMsg, "not yet below") then
 		-- Code to call home for fuel resupply should go here. Needs nested inventories, and code added to fuel.lua library for fuel.resupply(), then reassign fuelStatus to a new fuel.recharge(1) call.
 		print(textutils.serialize(fuelStatus));
 		print("Placeholder for fuel resupply code.");
@@ -50,7 +50,7 @@ function move(direction)
 		moveStatus.msg = "No fuel remaining. Shutting down.";
 	end
 	if moveStatus.moved then moveStatus.msg = "Moved successfully."; end
-	if not refueled and not string.find(fuelStatus.fuelMsg, "not yet below") then
+	if not fuelStatus.refueled and not string.find(fuelStatus.fuelMsg, "not yet below") then
 		if moveStatus.moved then
 			moveStatus.warnMsg = "Not enough fuel to stay above minimum reserve threshold. Shutdown without fuel resupply in "..(fuelStatus.currentFuel - 1).." steps."; -- this is kinda hacky. if the turtle doesn't move successfully, then the current fuel isn't decreasing like we're declaring here. Messaging should happen after movement.
 		else 

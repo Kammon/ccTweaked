@@ -36,13 +36,13 @@ function getFuelSources()
 end
 
 function fuel.recharge(amount)
-	local refueled, msg = false, "Fuel not yet below minimum reserve threshold of "..FUEL_THRESHOLD..".";
-	if turtle.getFuelLevel() < FUEL_THRESHOLD then
+	local refueled, currFuel, newFuel, fuelAdded, msg, fuelStatus = false, turtle.getFuelLevel(), nil, nil, "Fuel not yet below minimum reserve threshold of "..FUEL_THRESHOLD..".", {};
+	if currFuel < FUEL_THRESHOLD then
 		local amount, currSlot, fuelSources = amount or nil, turtle.getSelectedSlot(), getFuelSources();
 		if #fuelSources > 0 then
 			for i = 1,#fuelSources do
 				turtle.select(fuelSources[i].slot);
-				while turtle.getItemCount(fuelSources[i].slot) > 0 and turtle.getFuelLevel() < FUEL_Threshold do
+				while turtle.getItemCount(fuelSources[i].slot) > 0 and turtle.getFuelLevel() < FUEL_THRESHOLD do
 					if amount then turtle.refuel(amount) else turtle.refuel(1) end
 				end
 			end
@@ -55,7 +55,9 @@ function fuel.recharge(amount)
 			msg = "No fuel sources present. Turtle is running on reserve power below minimum threshold of "..FUEL_THRESHOLD.." and will cease function if not refueled."; refueled = false;
 		end
 	end
-	return refueled, msg
+	fuelAdded = turtle.getFuelLevel() - currFuel;
+	fuelStatus.refueled, fuelStatus.fuelAdded, fuelStatus.currentFuel, fuelStatus.fuelMsg = refueled, fuelAdded, turtle.getFuelLevel(), msg;
+	return fuelStatus;
 end
 
 

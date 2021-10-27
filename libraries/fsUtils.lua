@@ -18,4 +18,13 @@ function fsUtils.getContents(path)
 	return contents
 end
 
+function fsUtils.writeToFile(path, data)
+	local handle = fs.open(path, "w");
+	for k, v in pairs(data) do
+		-- Should add consideration for nested tables, but not necessary for right now. ie if type(v) == table then...
+		handle.writeLine(k.."="..v);
+	end
+	handle.close()
+end
+
 return fsUtils

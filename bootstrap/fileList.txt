@@ -16,6 +16,7 @@ libraries/fuel.lua
 libraries/inv.lua
 libraries/inventories.lua
 libraries/move.lua
+libraries/position.lua
 libraries/test2.lua
 libraries/test3.lua
 libraries/testLibrary.lua

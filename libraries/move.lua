@@ -5,7 +5,7 @@ local fsUtils = require("/repos/Kammon/ccTweaked/libraries/fsUtils")
 local position = {} -- placeholder until if/when positioning is implemented
 local fuel = require("/repos/Kammon/ccTweaked/libraries/fuel")
 
-function move(direction)
+function movement.move(direction)
 	local dir, moveStatus, fuelStatus = direction or nil, { moved = false, msg = "Move in progress..." }, fuel.recharge(1);
 	if not fuelStatus.refueled and not string.find(fuelStatus.fuelMsg, "not yet below") then
 		-- Code to call home for fuel resupply should go here. Needs nested inventories, and code added to fuel.lua library for fuel.resupply(), then reassign fuelStatus to a new fuel.recharge(1) call.

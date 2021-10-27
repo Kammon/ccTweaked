@@ -14,7 +14,7 @@ local fsUtils = require("/repos/Kammon/ccTweaked/libraries/fsUtils");
 local direction = { "south", "west", "north", "east" };
 
 function position.initialize(Position)
-	local pos = { xPos = Position.x or 0, yPos = Position.y or 0, zPos = Position.z or 0, direction = Position.dir or "south" };
+	local pos = { x = Position.x or 0, y = Position.y or 0, z = Position.z or 0, dir = Position.dir or "south" };
 	return pos;
 end
 

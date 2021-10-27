@@ -19,9 +19,9 @@ function position.initialize(Position)
 end
 
 function position.readFromFile()
-	return position.initialize(core.getKeyValuePairs(fsUtils.getContents(core.bp.."/data/position.txt")))
+	return position.initialize(core.getKeyValuePairs(fsUtils.getContents(core.bp.."data/position.txt")))
 end
 
-function position.writeToFile()
-
+function position.writeToFile(position)
+	fsUtils.writeToFile(core.bp.."data/position.txt", position);
 end

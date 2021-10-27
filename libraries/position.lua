@@ -25,3 +25,5 @@ end
 function position.writeToFile(position)
 	fsUtils.writeToFile(core.bp.."data/position.txt", position);
 end
+
+return position

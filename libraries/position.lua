@@ -46,13 +46,13 @@ function position.updatePosition(Position, movement)
 	elseif move == "back" then pos.x = pos.x - deltaVector[1]; pos.z = pos.z - deltaVector[2];
 	elseif move == "left" then
 		if position.direction[dirIndex % 2] ~= 0 then
-			pos.x = pos.x + deltaVector[2]; pos.z = pos.z + deltaVector[1];
+			pos.x = pos.x - deltaVector[2]; pos.z = pos.z - deltaVector[1];
 		else
 			pos.x = pos.x - deltaVector[2]; pos.z = pos.z - deltaVector[1];
 		end
 	elseif move == "right" then
-		if position.direction[pos.dir] % 2 ~= 0 then
-			pos.x = pos.x - deltaVector[2]; pos.z = pos.z - deltaVector[1];
+		if position.direction[dirIndex % 2] ~= 0 then
+			pos.x = pos.x + deltaVector[2]; pos.z = pos.z + deltaVector[1];
 		else
 			pos.x = pos.x + deltaVector[2]; pos.z = pos.z + deltaVector[1];
 		end

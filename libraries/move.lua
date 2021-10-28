@@ -14,11 +14,12 @@ function movement.turn(Position, turnDirection)
 	elseif turnDir == "around" then for i = 1, 2 do turtle.turnRight(); pos = position.updateDirection(pos, "right"); end
 	else print("Invalid turn direction supplied.");
 	end
+	position.writeToFile(pos);
 	return pos;
 end
 
-function movement.move(direction)
-	local pos, dir, moveStatus, fuelStatus = position.readFromFile(), direction or nil, { moved = false, msg = "Move in progress..." }, fuel.recharge(1);
+function movement.move(Position, direction)
+	local pos, dir, moveStatus, fuelStatus = Position, direction or nil, { moved = false, msg = "Move in progress..." }, fuel.recharge(1);
 	if not fuelStatus.refueled and not string.find(fuelStatus.fuelMsg, "not yet below") then
 		-- Code to call home for fuel resupply should go here. Needs nested inventories, and code added to fuel.lua library for fuel.resupply(), then reassign fuelStatus to a new fuel.recharge(1) call.
 		print(textutils.serialize(fuelStatus));

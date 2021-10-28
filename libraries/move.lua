@@ -7,8 +7,8 @@ local fuel = require("/repos/Kammon/ccTweaked/libraries/fuel")
 
 --local pos = position.readFromFile();
 
-function movement.turn(turnDirection)
-	local turnDir = turnDirection;
+function movement.turn(Position, turnDirection)
+	local pos, turnDir = Position, turnDirection;
 	if turnDir == "right" then turtle.turnRight(); pos = position.updateDirection(pos, "right");
 	elseif turnDir == "left" then turtle.turnLeft(); pos = position.updateDirection(pos, "left");
 	elseif turnDir == "around" then for i = 1, 2 do turtle.turnRight(); pos = position.updateDirection(pos, "right"); end
@@ -31,24 +31,24 @@ function movement.move(direction)
 				moveStatus.moved = turtle.forward();
 				if moveStatus.moved then pos = position.updatePosition(pos, "forward"); end
 			elseif direction == "back" then
-				pos = movement.turn("around");
+				pos = movement.turn(pos, "around");
 				--for i = 1, 2 do pos.dir = movement.turn("right");  --[[turtle.turnRight();--]] end
 				while turtle.detect() do turtle.dig(); os.sleep(1); end
 				moveStatus.moved = turtle.forward();
-				pos = movement.turn("around");
+				pos = movement.turn(pos, "around");
 				--for i = 1, 2 do pos.dir = movement.turn("left"); --[[turtle.turnLeft();--]] end
 				if moveStatus.moved then pos = position.updatePosition(pos, "back"); end
 			elseif direction == "left" then
-				pos = movement.turn("left"); --[[turtle.turnLeft();--]]
+				pos = movement.turn(pos, "left"); --[[turtle.turnLeft();--]]
 				while turtle.detect() do turtle.dig(); os.sleep(1); end
 				moveStatus.moved = turtle.forward();
-				pos = movement.turn("right"); --[[turtle.turnRight();--]]
+				pos = movement.turn(pos, "right"); --[[turtle.turnRight();--]]
 				if moveStatus.moved then pos = position.updatePosition(pos, "left"); end
 			elseif direction == "right" then
-				pos = movement.turn("right"); --[[turtle.turnRight();--]]
+				pos = movement.turn(pos, "right"); --[[turtle.turnRight();--]]
 				while turtle.detect() do turtle.dig(); os.sleep(1); end
 				moveStatus.moved = turtle.forward();
-				pos = movement.turn("left"); --[[turtle.turnLeft();--]]
+				pos = movement.turn(pos, "left"); --[[turtle.turnLeft();--]]
 				if moveStatus.moved then pos = position.updatePosition(pos, "right"); end
 			elseif direction == "up" then
 				local blockAbove = turtle.inspectUp()

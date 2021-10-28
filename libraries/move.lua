@@ -9,12 +9,12 @@ local pos = position.readFromFile();
 
 function movement.turn(turnDirection)
 	local turnDir = turnDirection;
-	if turnDir == "right" then turtle.turnRight(); pos.dir = position.updateDirection(pos.dir, "right");
-	elseif turnDir == "left" then turtle.turnLeft(); pos.dir = position.updateDirection(pos.dir, "left");
-	elseif turnDir == "around" then for i = 1, 2 do turtle.turnRight(); pos.dir = position.updateDirection(pos.dir, "right"); end
+	if turnDir == "right" then turtle.turnRight(); pos.dir = position.updateDirection(pos, "right");
+	elseif turnDir == "left" then turtle.turnLeft(); pos.dir = position.updateDirection(pos, "left");
+	elseif turnDir == "around" then for i = 1, 2 do turtle.turnRight(); pos.dir = position.updateDirection(pos, "right"); end
 	else print("Invalid turn direction supplied.");
 	end
-	return pos.dir;
+	--return pos;
 end
 
 function movement.move(direction)

@@ -14,7 +14,7 @@ function movement.turn(turnDirection)
 	elseif turnDir == "around" then for i = 1, 2 do turtle.turnRight(); pos.dir = position.updateDirection(pos.dir, "right"); end
 	else print("Invalid turn direction supplied.");
 	end
-	return dir;
+	return pos.dir;
 end
 
 function movement.move(direction)

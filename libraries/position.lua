@@ -39,7 +39,7 @@ function changeVector(direction)
 end
 
 function position.updatePosition(Position, movement)
-	local pos, move, dirIndex, updated = Position or position.initialize(), movement, nil, true;
+	local pos, move, dirIndex = Position or position.initialize(), movement, nil;
 	local deltaVector = changeVector(pos.dir);
 	for k, v in ipairs(position.direction) do if pos.dir == v then dirIndex = k end end
 	if move == "forward" then pos.x = pos.x + deltaVector[1]; pos.z = pos.z + deltaVector[2];
@@ -60,9 +60,8 @@ function position.updatePosition(Position, movement)
 	elseif move == "down" then pos.y = pos.y - 1;
 	else
 		print("Invalid direction. Unable to update position.");
-		updated = false;
 	end
-	return updated, pos;
+	return pos;
 end
 
 function position.updateDirection(Position, turnDirection)

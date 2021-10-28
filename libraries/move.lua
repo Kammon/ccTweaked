@@ -5,7 +5,7 @@ local fsUtils = require("/repos/Kammon/ccTweaked/libraries/fsUtils")
 local position = require("/repos/Kammon/ccTweaked/libraries/position") -- placeholder until if/when positioning is implemented
 local fuel = require("/repos/Kammon/ccTweaked/libraries/fuel")
 
-local pos = position.readFromFile();
+--local pos = position.readFromFile();
 
 function movement.turn(turnDirection)
 	local turnDir = turnDirection;
@@ -14,11 +14,11 @@ function movement.turn(turnDirection)
 	elseif turnDir == "around" then for i = 1, 2 do turtle.turnRight(); pos = position.updateDirection(pos, "right"); end
 	else print("Invalid turn direction supplied.");
 	end
-	--return pos;
+	return pos;
 end
 
 function movement.move(direction)
-	local dir, moveStatus, fuelStatus = direction or nil, { moved = false, msg = "Move in progress..." }, fuel.recharge(1);
+	local pos, dir, moveStatus, fuelStatus = position.readFromFile(), direction or nil, { moved = false, msg = "Move in progress..." }, fuel.recharge(1);
 	if not fuelStatus.refueled and not string.find(fuelStatus.fuelMsg, "not yet below") then
 		-- Code to call home for fuel resupply should go here. Needs nested inventories, and code added to fuel.lua library for fuel.resupply(), then reassign fuelStatus to a new fuel.recharge(1) call.
 		print(textutils.serialize(fuelStatus));
@@ -29,37 +29,37 @@ function movement.move(direction)
 			if direction == "forward" then
 				while turtle.detect() do turtle.dig(); os.sleep(1); end
 				moveStatus.moved = turtle.forward();
-				if moveStatus.moved then position.updatePosition(pos, "forward"); end
+				if moveStatus.moved then pos = position.updatePosition(pos, "forward"); end
 			elseif direction == "back" then
-				movement.turn("around");
+				pos = movement.turn("around");
 				--for i = 1, 2 do pos.dir = movement.turn("right");  --[[turtle.turnRight();--]] end
 				while turtle.detect() do turtle.dig(); os.sleep(1); end
 				moveStatus.moved = turtle.forward();
-				movement.turn("around");
+				pos = movement.turn("around");
 				--for i = 1, 2 do pos.dir = movement.turn("left"); --[[turtle.turnLeft();--]] end
-				if moveStatus.moved then position.updatePosition(pos, "back"); end
+				if moveStatus.moved then pos = position.updatePosition(pos, "back"); end
 			elseif direction == "left" then
-				pos.dir = movement.turn("left"); --[[turtle.turnLeft();--]]
+				pos = movement.turn("left"); --[[turtle.turnLeft();--]]
 				while turtle.detect() do turtle.dig(); os.sleep(1); end
 				moveStatus.moved = turtle.forward();
-				pos.dir = movement.turn("right"); --[[turtle.turnRight();--]]
-				if moveStatus.moved then position.updatePosition(pos, "left"); end
+				pos = movement.turn("right"); --[[turtle.turnRight();--]]
+				if moveStatus.moved then pos = position.updatePosition(pos, "left"); end
 			elseif direction == "right" then
-				pos.dir = movement.turn("right"); --[[turtle.turnRight();--]]
+				pos = movement.turn("right"); --[[turtle.turnRight();--]]
 				while turtle.detect() do turtle.dig(); os.sleep(1); end
 				moveStatus.moved = turtle.forward();
-				pos.dir = movement.turn("left"); --[[turtle.turnLeft();--]]
-				if moveStatus.moved then position.updatePosition(pos, "right"); end
+				pos = movement.turn("left"); --[[turtle.turnLeft();--]]
+				if moveStatus.moved then pos = position.updatePosition(pos, "right"); end
 			elseif direction == "up" then
 				local blockAbove = turtle.inspectUp()
 				while turtle.detectUp() and blockAbove and blockAbove.name ~= "minecraft:bedrock" do turtle.digUp(); os.sleep(1); end
 				moveStatus.moved = turtle.up();
-				if moveStatus.moved then position.updatePosition(pos, "up"); end
+				if moveStatus.moved then pos = position.updatePosition(pos, "up"); end
 			elseif direction == "down" then
 				local blockBelow = turtle.inspectDown();
 				while turtle.detectDown() and blockBelow and blockBelow.name ~= "minecraft:bedrock"  do turtle.digDown(); os.sleep(1); end
 				moveStatus.moved = turtle.down();
-				if moveStatus.moved then position.updatePosition(pos, "down"); end
+				if moveStatus.moved then pos = position.updatePosition(pos, "down"); end
 			else
 				moveStatus.msg = "Invalid direction supplied.";
 			end

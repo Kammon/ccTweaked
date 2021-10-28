@@ -67,7 +67,7 @@ end
 
 function position.updateDirection(Position, turnDirection)
 	local pos, turnDir, dirIndex = Position, turnDirection, nil;
-	for k, v in ipairs(position.direction) do if dir == v then dirIndex = k end end
+	for k, v in ipairs(position.direction) do if pos.dir == v then dirIndex = k end end
 	if turnDir == "right" then
 		pos.dir = position.direction[dirIndex % 4 + 1]
 	else

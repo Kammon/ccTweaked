@@ -27,8 +27,45 @@ function movement.move(Position, direction)
 	end
 	if fuelStatus.currentFuel > 0 then
 		if direction then
+			--[[
 			if direction == "forward" then
 				while turtle.detect() do turtle.dig(); os.sleep(1); end
+				moveStatus.moved = turtle.forward();
+				if moveStatus.moved then pos = position.updatePosition(pos, "forward"); end
+			elseif direction == "back" then
+				pos = movement.turn(pos, "around");
+				--for i = 1, 2 do pos.dir = movement.turn("right"); end
+				while turtle.detect() do turtle.dig(); os.sleep(1); end
+				moveStatus.moved = turtle.forward();
+				pos = movement.turn(pos, "around");
+				--for i = 1, 2 do pos.dir = movement.turn("left"); end
+				if moveStatus.moved then pos = position.updatePosition(pos, "back"); end
+			elseif direction == "left" then
+				pos = movement.turn(pos, "left");
+				while turtle.detect() do turtle.dig(); os.sleep(1); end
+				moveStatus.moved = turtle.forward();
+				pos = movement.turn(pos, "right");
+				if moveStatus.moved then pos = position.updatePosition(pos, "left"); end
+			elseif direction == "right" then
+				pos = movement.turn(pos, "right");
+				while turtle.detect() do turtle.dig(); os.sleep(1); end
+				moveStatus.moved = turtle.forward();
+				pos = movement.turn(pos, "left");
+				if moveStatus.moved then pos = position.updatePosition(pos, "right"); end
+			elseif direction == "up" then
+				local present, blockAbove = turtle.inspectUp()
+				while turtle.detectUp() and present and blockAbove.name ~= "minecraft:bedrock" do turtle.digUp(); os.sleep(1); end
+				moveStatus.moved = turtle.up();
+				if moveStatus.moved then pos = position.updatePosition(pos, "up"); end
+			elseif direction == "down" then
+				local present, blockBelow = turtle.inspectDown();
+				while turtle.detectDown() and present and blockBelow.name ~= "minecraft:bedrock"  do turtle.digDown(); os.sleep(1); end
+				moveStatus.moved = turtle.down();
+				if moveStatus.moved then pos = position.updatePosition(pos, "down"); end
+			--]]
+			if direction == "forward" then
+				local present, block = turtle.inspect();
+				while present do turtle.dig(); if block.name == "minecraft:sand" or block.name == "minecraft:red_sand" or block.name == "minecraft:gravel" then os.sleep(1); end present, block = turtle.inspect() end
 				moveStatus.moved = turtle.forward();
 				if moveStatus.moved then pos = position.updatePosition(pos, "forward"); end
 			elseif direction == "back" then
@@ -52,13 +89,13 @@ function movement.move(Position, direction)
 				pos = movement.turn(pos, "left"); --[[turtle.turnLeft();--]]
 				if moveStatus.moved then pos = position.updatePosition(pos, "right"); end
 			elseif direction == "up" then
-				local blockAbove = turtle.inspectUp()
-				while turtle.detectUp() and blockAbove and blockAbove.name ~= "minecraft:bedrock" do turtle.digUp(); os.sleep(1); end
+				local present, blockAbove = turtle.inspectUp()
+				while turtle.detectUp() and present and blockAbove.name ~= "minecraft:bedrock" do turtle.digUp(); os.sleep(1); end
 				moveStatus.moved = turtle.up();
 				if moveStatus.moved then pos = position.updatePosition(pos, "up"); end
 			elseif direction == "down" then
-				local blockBelow = turtle.inspectDown();
-				while turtle.detectDown() and blockBelow and blockBelow.name ~= "minecraft:bedrock"  do turtle.digDown(); os.sleep(1); end
+				local present, blockBelow = turtle.inspectDown();
+				while turtle.detectDown() and present and blockBelow.name ~= "minecraft:bedrock"  do turtle.digDown(); os.sleep(1); end
 				moveStatus.moved = turtle.down();
 				if moveStatus.moved then pos = position.updatePosition(pos, "down"); end
 			else

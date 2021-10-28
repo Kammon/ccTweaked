@@ -7,11 +7,11 @@ local fuel = require("/repos/Kammon/ccTweaked/libraries/fuel")
 
 local pos = position.readFromFile();
 
-function movement.turn(facing, turnDirection)
-	local dir, turnDir = facing, turnDirection;
-	if turnDir == "right" then turtle.turnRight(); dir = position.updateDirection(dir, "right");
-	elseif turnDir == "left" then turtle.turnLeft(); dir = position.updateDirection(dir, "left");
-	elseif turnDir == "around" then for i = 1, 2 do turtle.turnRight(); dir = position.updateDirection(dir, "right"); end
+function movement.turn(turnDirection)
+	local turnDir = turnDirection;
+	if turnDir == "right" then turtle.turnRight(); pos.dir = position.updateDirection(pos.dir, "right");
+	elseif turnDir == "left" then turtle.turnLeft(); pos.dir = position.updateDirection(pos.dir, "left");
+	elseif turnDir == "around" then for i = 1, 2 do turtle.turnRight(); pos.dir = position.updateDirection(pos.dir, "right"); end
 	else print("Invalid turn direction supplied.");
 	end
 	return dir;

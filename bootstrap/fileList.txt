@@ -10,6 +10,7 @@ data/inventory/resources.txt
 data/inventory/saplings.txt
 data/inventory/unwanted.txt
 data/inventory/wood.txt
+data/position.txt
 libraries/core.lua
 libraries/fsUtils.lua
 libraries/fuel.lua

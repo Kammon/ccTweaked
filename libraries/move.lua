@@ -2,8 +2,20 @@ local movement = {}
 
 local core = require("/repos/Kammon/ccTweaked/libraries/core")
 local fsUtils = require("/repos/Kammon/ccTweaked/libraries/fsUtils")
-local position = {} -- placeholder until if/when positioning is implemented
+local position = require("/repos/Kammon/ccTweaked/libraries/position") -- placeholder until if/when positioning is implemented
 local fuel = require("/repos/Kammon/ccTweaked/libraries/fuel")
+
+local pos = position.readFromFile();
+
+function movement.turn(facing, turnDirection)
+	local dir, turnDir = facing, turnDirection;
+	if turnDir == "right" then turtle.turnRight(); dir = position.updateDirection(dir, "right");
+	elseif turnDir == "left" then turtle.turnLeft(); dir = position.upDateDirection(dir, "left");
+	elseif turnDir == "around" then for i = 1, 2 do turtle.turnRight(); dir = position.updateDirection(dir, "right"); end
+	else print("Invalid turn direction supplied.");
+	end
+	return dir;
+end
 
 function movement.move(direction)
 	local dir, moveStatus, fuelStatus = direction or nil, { moved = false, msg = "Move in progress..." }, fuel.recharge(1);
@@ -17,29 +29,35 @@ function movement.move(direction)
 			if direction == "forward" then
 				while turtle.detect() do turtle.dig(); os.sleep(1); end
 				moveStatus.moved = turtle.forward();
+				if moveStatus.moved then pos.updatePosition(pos, "forward"); end
 			elseif direction == "back" then
-				for i = 1, 2 do turtle.turnRight(); end
+				for i = 1, 2 do pos.dir = movement.turn(pos.dir, "right");  --[[turtle.turnRight();--]] end
 				while turtle.detect() do turtle.dig(); os.sleep(1); end
 				moveStatus.moved = turtle.forward();
-				for i = 1, 2 do turtle.turnLeft(); end
+				for i = 1, 2 do pos.dir = movement.turn(pos.dir, "left"); --[[turtle.turnLeft();--]] end
+				if moveStatus.moved then pos.updatePosition(pos, "back"); end
 			elseif direction == "left" then
-				turtle.turnLeft();
+				pos.dir = movement.turn(pos.dir, "left"); --[[turtle.turnLeft();--]]
 				while turtle.detect() do turtle.dig(); os.sleep(1); end
 				moveStatus.moved = turtle.forward();
-				turtle.turnRight();
+				pos.dir = movement.turn(pos.dir, "right"); --[[turtle.turnRight();--]]
+				if moveStatus.moved then pos.updatePosition(pos, "left"); end
 			elseif direction == "right" then
-				turtle.turnRight();
+				pos.dir = movement.turn(pos.dir, "right"); --[[turtle.turnRight();--]]
 				while turtle.detect() do turtle.dig(); os.sleep(1); end
 				moveStatus.moved = turtle.forward();
-				turtle.turnLeft();
+				pos.dir = movement.turn(pos.dir, "left"); --[[turtle.turnLeft();--]]
+				if moveStatus.moved then pos.updatePosition(pos, "right"); end
 			elseif direction == "up" then
 				local blockAbove = turtle.inspectUp()
 				while turtle.detectUp() and blockAbove and blockAbove.name ~= "minecraft:bedrock" do turtle.digUp(); os.sleep(1); end
 				moveStatus.moved = turtle.up();
+				if moveStatus.moved then pos.updatePosition(pos, "up"); end
 			elseif direction == "down" then
 				local blockBelow = turtle.inspectDown();
 				while turtle.detectDown() and blockBelow and blockBelow.name ~= "minecraft:bedrock"  do turtle.digDown(); os.sleep(1); end
 				moveStatus.moved = turtle.down();
+				if moveStatus.moved then pos.updatePosition(pos, "down"); end
 			else
 				moveStatus.msg = "Invalid direction supplied.";
 			end

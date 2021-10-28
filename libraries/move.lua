@@ -31,22 +31,24 @@ function movement.move(direction)
 				moveStatus.moved = turtle.forward();
 				if moveStatus.moved then position.updatePosition(pos, "forward"); end
 			elseif direction == "back" then
-				for i = 1, 2 do pos.dir = movement.turn(pos.dir, "right");  --[[turtle.turnRight();--]] end
+				movement.turn("around");
+				--for i = 1, 2 do pos.dir = movement.turn("right");  --[[turtle.turnRight();--]] end
 				while turtle.detect() do turtle.dig(); os.sleep(1); end
 				moveStatus.moved = turtle.forward();
-				for i = 1, 2 do pos.dir = movement.turn(pos.dir, "left"); --[[turtle.turnLeft();--]] end
+				movement.turn("around");
+				--for i = 1, 2 do pos.dir = movement.turn("left"); --[[turtle.turnLeft();--]] end
 				if moveStatus.moved then position.updatePosition(pos, "back"); end
 			elseif direction == "left" then
-				pos.dir = movement.turn(pos.dir, "left"); --[[turtle.turnLeft();--]]
+				pos.dir = movement.turn("left"); --[[turtle.turnLeft();--]]
 				while turtle.detect() do turtle.dig(); os.sleep(1); end
 				moveStatus.moved = turtle.forward();
-				pos.dir = movement.turn(pos.dir, "right"); --[[turtle.turnRight();--]]
+				pos.dir = movement.turn("right"); --[[turtle.turnRight();--]]
 				if moveStatus.moved then position.updatePosition(pos, "left"); end
 			elseif direction == "right" then
-				pos.dir = movement.turn(pos.dir, "right"); --[[turtle.turnRight();--]]
+				pos.dir = movement.turn("right"); --[[turtle.turnRight();--]]
 				while turtle.detect() do turtle.dig(); os.sleep(1); end
 				moveStatus.moved = turtle.forward();
-				pos.dir = movement.turn(pos.dir, "left"); --[[turtle.turnLeft();--]]
+				pos.dir = movement.turn("left"); --[[turtle.turnLeft();--]]
 				if moveStatus.moved then position.updatePosition(pos, "right"); end
 			elseif direction == "up" then
 				local blockAbove = turtle.inspectUp()

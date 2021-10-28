@@ -75,7 +75,7 @@ function movement.move(position, direction)
 			moveStatus.warnMsg = "Not enough fuel to stay above minimum reserve threshold. Shutdown without fuel resupply in "..fuelStatus.currentFuel.." steps."; -- this is kinda hacky. if the turtle doesn't move successfully, then the current fuel isn't decreasing like we're declaring here. Messaging should happen after movement.
 		end
 	end
-	return moveStatus;
+	return moveStatus, pos;
 end
 
 return movement

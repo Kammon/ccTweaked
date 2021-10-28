@@ -39,12 +39,13 @@ function changeVector(direction)
 end
 
 function position.updatePosition(Position, movement)
-	local pos, move, updated = Position or position.initialize(), movement, true;
+	local pos, move, dirIndex, updated = Position or position.initialize(), movement, nil, true;
 	local deltaVector = changeVector(pos.dir);
+	for k, v in ipairs(position.direction) do if pos.dir == v then dirIndex = k end end
 	if move == "forward" then pos.x = pos.x + deltaVector[1]; pos.z = pos.z + deltaVector[2];
 	elseif move == "back" then pos.x = pos.x - deltaVector[1]; pos.z = pos.z - deltaVector[2];
 	elseif move == "left" then
-		if position.direction[pos.dir] % 2 ~= 0 then
+		if position.direction[dirIndex % 2] ~= 0 then
 			pos.x = pos.x + deltaVector[2]; pos.z = pos.z + deltaVector[1];
 		else
 			pos.x = pos.x - deltaVector[2]; pos.z = pos.z - deltaVector[1];

@@ -49,7 +49,7 @@ function movement.getTurnFn(direction)
 			if direction == "left" or direction == "right" then
 				for i = 1, j do turtle.turn]]..dir:gsub("^%l",string.upper)..[[() end
 			else
-				os.sleep(.05); print(os.getComputerLabel().."is slacking off!");
+				os.sleep(.05); print(os.getComputerLabel().." is slacking off!");
 			end
 		end]]
 	))();

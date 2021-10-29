@@ -3,6 +3,7 @@ bootstrap/fileList.txt
 data/config.txt
 data/inventory/blocks.txt
 data/inventory/fuel.txt
+data/inventory/gravityblocks.txt
 data/inventory/inventories.txt
 data/inventory/inventoryTypes.txt
 data/inventory/lighting.txt
@@ -16,6 +17,7 @@ libraries/fsUtils.lua
 libraries/fuel.lua
 libraries/inv.lua
 libraries/inventories.lua
+libraries/move-experimental.lua
 libraries/move.lua
 libraries/position.lua
 libraries/test2.lua

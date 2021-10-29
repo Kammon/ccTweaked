@@ -39,7 +39,7 @@ function movement.getTurnFn(direction)
 	local dir, j = direction, 1;
 	if dir == "back" then
 		local dirChoice = {"left", "right"};
-		dir = "\""..dirChoice[(math.floor((math.random(1,1000) / 1000) + 1.5))].."\""; 
+		dir = dirChoice[(math.floor((math.random(1,1000) / 1000) + 1.5))]; 
 		j = 2;
 		print(dir); -- TEST CODE
 	end

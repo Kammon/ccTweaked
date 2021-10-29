@@ -39,15 +39,15 @@ function movement.getTurnFn(direction)
 	local dir, j = direction, 1;
 	if dir == "back" then
 		local dirChoice = {"left", "right"};
-		dir = dirChoice[(math.floor((math.random(1,1000) / 1000) + 1.5))]; 
+		dir = "\""..dirChoice[(math.floor((math.random(1,1000) / 1000) + 1.5))].."\""; 
 		j = 2;
 		print(dir); -- TEST CODE
 	end
 	return assert(loadstring([[
 		return function() 
-			local direction, j = ]]..dir..[[, ]]..j..[[;
+			local direction, j = "]]..dir..[[", ]]..j..[[;
 			if direction == "left" or direction == "right" then
-				for i = 1, j do turtle.turn]]..direction:gsub("^%l",string.upper)..[[() end
+				for i = 1, j do turtle.turn]]..dir:gsub("^%l",string.upper)..[[() end
 			else
 				os.sleep(.05); print("Yawn! Nice nap!");
 			end

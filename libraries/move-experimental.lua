@@ -37,11 +37,11 @@ end
 
 function movement.getTurnFn(direction)
 	local dir, j = direction, 1;
-	if dir == "back" then
+	if dir == "back" then -- Randomize the turn direction for turning around, because you don't always turn around the same way, do you? Hmm, robot?
 		local dirChoice = {"left", "right"};
 		dir = dirChoice[(math.floor((math.random(1,1000) / 1000) + 1.5))]; 
 		j = 2;
-		print(dir); -- TEST CODE
+		-- print(dir); -- TEST CODE
 	end
 	return assert(loadstring([[
 		return function() 
@@ -49,7 +49,7 @@ function movement.getTurnFn(direction)
 			if direction == "left" or direction == "right" then
 				for i = 1, j do turtle.turn]]..dir:gsub("^%l",string.upper)..[[() end
 			else
-				os.sleep(.05); print("Yawn! Nice nap!");
+				os.sleep(.05); print(os.getComputerLabel().."is slacking off!");
 			end
 		end]]
 	))();

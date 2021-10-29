@@ -20,9 +20,38 @@ function movement.turn(Position, turnDirection)
 end
 
 function movement.turnTest(direction)
-		local turnFn = assert(loadstring('return function(...) assert(#arg >= 1,"Function expects >= 1 argument."); assert(type(arg[1]) == "number", "Function arg 1 expects number."); if #arg > 1 then assert(type(arg[2] == "number", "Function arg 2 expects a number")); for i = 1, arg[2] do turtle.turn'..direction:gsub("^%l",string.upper)..'() end else os.sleep(arg[1]); print("Yawn! Nice nap!"); end end'))();
+		local turnFn = assert(loadstring([[
+			return function(...) 
+				assert(#arg >= 1,"Function expects >= 1 argument.");
+				assert(type(arg[1]) == "number", "Function arg 1 expects number.");
+				if #arg > 1 then
+					assert(type(arg[2] == "number", "Function arg 2 expects a number"));
+					for i = 1, arg[2] do turtle.turn]]..direction:gsub("^%l",string.upper)..[[() end
+				else
+					os.sleep(arg[1]); print("Yawn! Nice nap!");
+				end
+			end]]))();
 		turnFn(.5);
 		turnFn(9001, 3);
+end
+
+function movement.getTurnFn(direction)
+	local dir, j = direction, 1;
+	if dir == "back" then
+		local dirChoice = {"left", "right"};
+		dir = dirChoice[(math.floor((math.random(1,1000) / 1000) + 1.5))]; 
+		j = 2;
+	end
+	return assert(loadstring([[
+		return function() 
+			local dir, j = ]]..j..[[, ]]..dir..[[;
+			if dir == "left" or dir == "right" then
+				for i = 1, j do turtle.turn..dir:gsub("^%l",string.upper)() end
+			else
+				os.sleep(arg[1]); print("Yawn! Nice nap!");
+			end
+		end]]
+	))();
 end
 
 function movement.move(Position, direction)

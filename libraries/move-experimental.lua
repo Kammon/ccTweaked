@@ -44,7 +44,7 @@ function movement.getTurnFn(direction)
 	end
 	return assert(loadstring([[
 		return function() 
-			local dir, j = ]]..j..[[, ]]..dir..[[;
+			local dir, j = ]]..dir..[[, ]]..j..[[;
 			if dir == "left" or dir == "right" then
 				for i = 1, j do turtle.turn..dir:gsub("^%l",string.upper)() end
 			else

@@ -13,9 +13,27 @@ local fsUtils = require("/repos/Kammon/ccTweaked/libraries/fsUtils");
 
 position.direction = { "south", "west", "north", "east" };
 
-function position.initialize(Position)
-	local pos = { x = Position.x or 0, y = Position.y or 0, z = Position.z or 0, dir = Position.dir or "south" };
-	return pos;
+function position.initialize()
+	local currPos, newPos, i, delta = {}, {}, 1, {};
+	currPos.x, currPos.y, currPos.z = gps.locate();
+	while turtle.detect() and i <= 4 do turtle.turnLeft(); i = i + 1; end
+	if turtle.forward() then
+		newPos.x, newPos.y, newPos.z = gps.locate();
+		turtle.back();
+	else
+		assert(false,"Unable to move to determine direction.");
+	end
+	for k, v in pairs(currPos) do
+		for k2, v2 in pairs(newPos) do
+			if k == k2 then delta.change = v2 - v; delta.plane = k; end
+		end
+	end
+	if delta.change > 0 then
+		if delta.plane == "x" then currPos.dir == "east"; else currPos.dir == "south"; end
+	else
+		if delta.plane == "x" then currPos.dir == "west"; else currPos.dir == "north"; end
+	end
+	return currPos;
 end
 
 function position.readFromFile()
@@ -48,13 +66,13 @@ function position.updatePosition(Position, movement)
 		if position.direction[dirIndex % 2] ~= 0 then
 			pos.x = pos.x - deltaVector[2]; pos.z = pos.z - deltaVector[1];
 		else
-			pos.x = pos.x - deltaVector[2]; pos.z = pos.z - deltaVector[1];
+			pos.x = pos.x + deltaVector[2]; pos.z = pos.z + deltaVector[1];
 		end
 	elseif move == "right" then
 		if position.direction[dirIndex % 2] ~= 0 then
 			pos.x = pos.x + deltaVector[2]; pos.z = pos.z + deltaVector[1];
 		else
-			pos.x = pos.x + deltaVector[2]; pos.z = pos.z + deltaVector[1];
+			pos.x = pos.x - deltaVector[2]; pos.z = pos.z - deltaVector[1];
 		end
 	elseif move == "up" then pos.y = pos.y + 1;
 	elseif move == "down" then pos.y = pos.y - 1;

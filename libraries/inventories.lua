@@ -11,10 +11,13 @@ end
 
 --list resources/blocks/inventories/etc
 inventories.blocks = inventories.fsu.getContents(inventories.core.bp.."data/inventory/blocks.txt")
+inventories.gravBlocks = inventories.fsu.getContents(inventories.core.bp.."data/inventory/gravityblocks.txt")
 inventories.fuel = inventories.fsu.getContents(inventories.core.bp.."data/inventory/fuel.txt")
 inventories.resources = inventories.fsu.getContents(inventories.core.bp.."data/inventory/resources.txt")
 inventories.unwanted = inventories.fsu.getContents(inventories.core.bp.."data/inventory/unwanted.txt")
 inventories.lighting = inventories.fsu.getContents(inventories.core.bp.."data/inventory/lighting.txt")
+inventories.wood = inventories.fsu.getContents(inventories.core.bp.."data/inventory/wood.txt")
+inventories.saplings = inventories.fsu.getContents(inventories.core.bp.."data/inventory/saplings.txt")
 inventories.invList = inventories.getInventories()
 
 function inventories.getInventoryTypes()

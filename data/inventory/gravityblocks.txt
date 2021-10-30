@@ -1,0 +1,4 @@
+# list of blocks affected by gravity
+minecraft:sand
+minecraft:red_sand
+minecraft:gravel

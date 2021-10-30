@@ -14,7 +14,7 @@ local fsUtils = require("/repos/Kammon/ccTweaked/libraries/fsUtils");
 position.direction = { "south", "west", "north", "east" };
 
 function position.initialize()
-	local currPos, newPos, i, delta = {}, {}, 1, {};
+	local currPos, newPos, i, coordDiff, delta = {}, {}, 1, {}, {};
 	currPos.x, currPos.y, currPos.z = gps.locate();
 	while turtle.detect() and i <= 4 do turtle.turnLeft(); i = i + 1; end
 	if turtle.forward() then
@@ -25,8 +25,11 @@ function position.initialize()
 	end
 	for k, v in pairs(currPos) do
 		for k2, v2 in pairs(newPos) do
-			if k == k2 then delta.change = v2 - v; delta.plane = k; end
+			if k == k2 then coordDiff[k] = v2 - v; end
 		end
+	end
+	for k, v in pairs(coordDiff) do
+		if v ~= 0 then delta.plane = k; delta.chang = v; end
 	end
 	if delta.change > 0 then
 		if delta.plane == "x" then currPos.dir = "east"; else currPos.dir = "south"; end

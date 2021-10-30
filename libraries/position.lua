@@ -29,9 +29,9 @@ function position.initialize()
 		end
 	end
 	if delta.change > 0 then
-		if delta.plane == "x" then currPos.dir == "east"; else currPos.dir == "south"; end
+		if delta.plane == "x" then currPos.dir = "east"; else currPos.dir = "south"; end
 	else
-		if delta.plane == "x" then currPos.dir == "west"; else currPos.dir == "north"; end
+		if delta.plane == "x" then currPos.dir = "west"; else currPos.dir = "north"; end
 	end
 	return currPos;
 end

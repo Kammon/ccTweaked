@@ -66,7 +66,7 @@ function movement.getFunction(funcBase, direction)
 			if v2 == direction and v == funcBase then
 				if v2 == "back" then
 					if v == "turtle." then
-						func == assert(loadstring([[return function()]]..v..v2..[[() end]]))();
+						func = assert(loadstring([[return function()]]..v..v2..[[() end]]))();
 					else
 						assert(false, "Invalid function option for \"back\" direction.");
 					end

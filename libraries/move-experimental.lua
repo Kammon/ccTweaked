@@ -94,9 +94,11 @@ function movement.dig(direction)
 		inspectFn = movement.getFunction("turtle.inspect", direction);
 	end
 	present, block = inspectFn();
-	while present do digFn(); for k, v in pairs(inv.gravBlocks) do
-		if block.name == v then os.sleep(.25); end
-		present, block = inspectFn();
+	while present do digFn();
+		for k, v in pairs(inv.gravBlocks) do
+			if block.name == v then os.sleep(.25); end
+			present, block = inspectFn();
+		end
 	end
 	return present;
 end

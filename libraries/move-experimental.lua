@@ -71,7 +71,7 @@ function movement.getFunction(funcBase, direction)
 						assert(false, "Invalid function option for \"back\" direction.");
 					end
 				else
-					func == assert(loadstring([[return function()]]..v..v2..[[() end]]))();
+					func = assert(loadstring([[return function()]]..v..v2..[[() end]]))();
 				end
 			else
 				assert(false, "Invalid option for function and/or direction.");
